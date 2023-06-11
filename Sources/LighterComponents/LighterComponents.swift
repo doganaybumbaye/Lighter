@@ -7,8 +7,21 @@
 import SwiftUI
 
 public struct LighterButton : View{
-    public init() {}
+    var title : String
+    var action : ()
+    public init(title : String, action : ()) {
+        self.title = title
+        self.action = action
+    }
     public var body: some View {
-        Text("Hello world in MyPackage!")
+        Button {
+            action
+        } label: {
+            Text(title)
+        }
+
+        
+        
+        
     }
 }
