@@ -7,28 +7,7 @@
 import SwiftUI
 
 
-public extension Color {
-    static let primaryColor = Color(red: 48/255, green: 92/255, blue: 210/255) // Gökyüzü Mavisi
-    static let secondaryColor = Color(red: 240/255, green: 120/255, blue: 34/255) // Altın Turuncusu
-    static let backgroundColor = Color(red: 250/255, green: 248/255, blue: 239/255) // Şeftali Beyazı
-    static let textColor = Color(red: 49/255, green: 52/255, blue: 67/255) // Orman Yeşili
-    static let accentColor2 = Color(red: 220/255, green: 12/255, blue: 12/255) // Mor Pembe
-
-    static let complementaryColor1 = Color(red: 38/255, green: 167/255, blue: 139/255) // Deniz Yeşili
-    static let complementaryColor2 = Color(red: 191/255, green: 22/255, blue: 131/255) // Somon Pembe
-    static let fancyGray = Color(red: 150/255, green: 150/255, blue: 150/255) // Fancy Gri Renk
-    static let offWhiteColor = Color(red: 245/255, green: 245/255, blue: 245/255)
-    static let brightOffWhiteColor = Color(red: 255/255, green: 250/255, blue: 250/255)
-
-    static let whiteGradient = LinearGradient(
-        gradient: Gradient(colors: [Color.white, Color(white: 0.95)]),
-        startPoint: .top,
-        endPoint: .bottom
-    )
-    
-}
-
-public struct FancyButtonStyle: ButtonStyle {
+public struct LighterButtonStyle: ButtonStyle {
     var buttonColor: Color
     var textColor : Color
     
@@ -53,7 +32,7 @@ public struct FancyButtonStyle: ButtonStyle {
             
     }
 }
-public struct RoundedRectIconButtonStyle: ButtonStyle {
+public struct LighterRoundedRectIconButtonStyle: ButtonStyle {
     var buttonColor: Color
     var iconColor : Color
     var textColor : Color
@@ -83,7 +62,7 @@ public struct RoundedRectIconButtonStyle: ButtonStyle {
     }
 }
 
-public struct FancyTextFieldStyle: SwiftUI.TextFieldStyle {
+public struct LighterTextFieldStyle: SwiftUI.TextFieldStyle {
     var headIcon : String
     
     public init(headIcon: String) { // Public initializer ekledik
@@ -110,7 +89,7 @@ public struct FancyTextFieldStyle: SwiftUI.TextFieldStyle {
     }
 }
 
-public struct InfoCardView: View {
+public struct LighterInfoCardView: View {
     var backgroundColor: Color
     var text: String
     public init(backgroundColor: Color = .black, text: String) {
@@ -120,7 +99,7 @@ public struct InfoCardView: View {
     public var body: some View {
         VStack {
             Text(text)
-                .foregroundColor(.textColor)
+                .foregroundColor(.lighterTextColor)
                 .font(.headline)
                 .padding()
                 .minimumScaleFactor(0.5)
@@ -133,7 +112,7 @@ public struct InfoCardView: View {
 }
 
 
-public struct FancyCheckboxStyle: ToggleStyle {
+public struct LighterCheckboxStyle: ToggleStyle {
     var size: CGFloat
     var cornerRadius: CGFloat
   
