@@ -6,47 +6,8 @@
 //}
 import SwiftUI
 
-public struct LighterButton : View{
-    var title : String
-    var titleColor : Color
-    var background : Color
-    var action : () -> Void
-    public init(title : String, titleColor : Color, background : Color ,action : @escaping () -> Void) {
-        self.title = title
-        self.titleColor = titleColor
-        self.background = background
-        self.action = action
-        
-    }
-    public var body: some View {
-        Button {
-            action()
-        } label: {
-            Text(title)
- 
-        }
-        
-        
-        .buttonStyle(GrowingButton(bgColor: background, titleColor: titleColor))
-        
-    }
-}
 
-struct GrowingButton: ButtonStyle {
-    var bgColor : Color
-    var titleColor : Color
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .frame(maxWidth: .infinity, maxHeight: 52)
-            .background(bgColor)
-            .foregroundStyle(titleColor)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-            .scaleEffect(configuration.isPressed ? 1.1 : 1)
-            .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
-    }
-}
-
-extension Color {
+public extension Color {
     static let primaryColor = Color(red: 48/255, green: 92/255, blue: 210/255) // Gökyüzü Mavisi
     static let secondaryColor = Color(red: 240/255, green: 120/255, blue: 34/255) // Altın Turuncusu
     static let backgroundColor = Color(red: 250/255, green: 248/255, blue: 239/255) // Şeftali Beyazı
@@ -67,10 +28,18 @@ extension Color {
     
 }
 
-struct FancyButtonStyle: ButtonStyle {
+public struct FancyButtonStyle: ButtonStyle {
     var buttonColor: Color
-    var textColor : Color = .white
-    func makeBody(configuration: Configuration) -> some View {
+    var textColor : Color
+    
+    public init(buttonColor: Color, textColor: Color = .white) {
+        self.buttonColor = buttonColor
+        self.textColor = textColor
+    }
+    
+    
+    
+    public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(maxWidth: .infinity)
             .padding()
@@ -84,12 +53,19 @@ struct FancyButtonStyle: ButtonStyle {
             
     }
 }
-struct RoundedRectIconButtonStyle: ButtonStyle {
-    var buttonColor: Color // Renk skalasından seçilen renk
-    var iconColor : Color = .white
-    var textColor : Color = .white
-    var cornerRadius : CGFloat = 12
-    func makeBody(configuration: Configuration) -> some View {
+public struct RoundedRectIconButtonStyle: ButtonStyle {
+    var buttonColor: Color
+    var iconColor : Color
+    var textColor : Color
+    var cornerRadius : CGFloat
+    
+    public init(buttonColor: Color, iconColor: Color = .white, textColor: Color = .white, cornerRadius: CGFloat = 12) {
+        self.buttonColor = buttonColor
+        self.iconColor = iconColor
+        self.textColor = textColor
+        self.cornerRadius = cornerRadius
+    }
+    public func makeBody(configuration: Configuration) -> some View {
         HStack {
             Image(systemName: "arrow.right") // İstediğiniz simgeyi buraya ekleyebilirsiniz
                 .foregroundColor(iconColor)
@@ -107,9 +83,13 @@ struct RoundedRectIconButtonStyle: ButtonStyle {
     }
 }
 
-struct CustomTextFieldStyle: TextFieldStyle {
+public struct FancyTextFieldStyle: SwiftUI.TextFieldStyle {
     var headIcon : String
-    func _body(configuration: TextField<Self._Label>) -> some View {
+    
+    public init(headIcon: String) { // Public initializer ekledik
+        self.headIcon = headIcon
+    }
+    public func _body(configuration: TextField<Self._Label>) -> some View {
         ZStack(alignment: .leading) {
             configuration
                 .padding(EdgeInsets(top: 12, leading: 42, bottom: 12, trailing: 8))
@@ -130,11 +110,14 @@ struct CustomTextFieldStyle: TextFieldStyle {
     }
 }
 
-struct InfoCardView: View {
+public struct InfoCardView: View {
     var backgroundColor: Color
     var text: String
-    
-    var body: some View {
+    public init(backgroundColor: Color = .black, text: String) {
+        self.backgroundColor = backgroundColor
+        self.text = text
+    }
+    public var body: some View {
         VStack {
             Text(text)
                 .foregroundColor(.textColor)
@@ -150,12 +133,19 @@ struct InfoCardView: View {
 }
 
 
-struct FancyCheckboxStyle: ToggleStyle {
-    var size: CGFloat = 24
-    var cornerRadius: CGFloat = 6
-    var animationDuration: Double = 0.2
+public struct FancyCheckboxStyle: ToggleStyle {
+    var size: CGFloat
+    var cornerRadius: CGFloat
+  
     var title : Text?
-    func makeBody(configuration: Configuration) -> some View {
+    
+    public init(size: CGFloat = 24, cornerRadius: CGFloat = 6, animationDuration: Double, title: Text? = nil) {
+        self.size = size
+        self.cornerRadius = cornerRadius
+
+        self.title = title
+    }
+    public func makeBody(configuration: Configuration) -> some View {
         Button {
             configuration.isOn.toggle()
         } label: {
