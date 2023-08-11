@@ -30,3 +30,18 @@ public extension Color {
     
 }
 
+extension Double{
+    
+    var sp : Double {
+        return (self * UIScreen.main.bounds.width / 3.4) / 100
+    }
+    
+    var spInt : Int {
+        return Int((self * UIScreen.main.bounds.width / 3.4) / 100)
+    }
+
+}
+extension Color{
+    static let prettyPrimary1 = Color(uiColor: UIColor(red: 0.100, green: 0.610, blue: 1, alpha: 1))
+    static let prettyPrimary2 = Color(uiColor: UIColor(red: 0.100, green: 0.270, blue: 1, alpha: 1))
+}

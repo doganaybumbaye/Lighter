@@ -191,3 +191,41 @@ public struct LighterCheckboxStyle: ToggleStyle {
 }
 
 
+struct RectButtonStyle: ButtonStyle {
+
+    @State var height : CGFloat = 56.sp
+    @State var cornerRadius : CGFloat = 12.sp
+    @State var foreground : Color = .white
+    var backgroundColor : Color?
+    
+    let colors = [
+        Color.prettyPrimary1,
+        Color.prettyPrimary2
+    ]
+
+    func makeBody(configuration: Configuration) -> some View {
+            configuration.label
+            
+            
+            .frame(maxWidth: .infinity, minHeight: height)
+            
+            .foregroundColor(foreground)
+            .background{
+                if let bgColor = backgroundColor{
+                    bgColor
+                }else{
+                    LinearGradient(gradient: Gradient(colors: colors), startPoint: .top, endPoint: .bottom)
+                }
+                
+            }
+            .cornerRadius(cornerRadius)
+            
+            .overlay {
+                if configuration.isPressed {
+                    Color(white: 1.0, opacity: 0.2)
+                        .cornerRadius(cornerRadius)
+                }
+            }
+            
+    }
+}
